@@ -17,7 +17,7 @@ html{
     --bg-color:rgb(12, 12, 12);
     --bg-button-color:#1a1a1a;
     --text-primary-color:rgb(241, 241, 241);
-    --task-color:rgb(42, 42, 42);
+    --task-color:rgb(60, 60, 60);
     --bg-delete:rgb(247, 43, 43);
 
     /* padding */
@@ -45,7 +45,7 @@ body{
 }
 
 main{
-    height: 100%;
+    min-height: 100%;
     display: flex;
     flex-direction: column;
 
@@ -79,6 +79,8 @@ section{
 section .task-column{
     background-color: var(--bg-button-color);
     flex-grow: 1;
+    width: 100%;
+    flex-shrink: 1;
     padding: var(--padding-l);
     border-radius: var(--border-radius-l);
     display: flex;
@@ -95,6 +97,7 @@ section .task-column .heading{
 
 section .task-column .task{
     background-color: var(--task-color);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: var(--border-radius-m);
     padding: var(--padding-m);
     display: flex;
@@ -102,8 +105,6 @@ section .task-column .task{
     gap: var(--padding-s);
     cursor: grab;
 }
-
-
 
 section .task-column .task button{
     align-self: flex-end;
@@ -135,7 +136,6 @@ section .task-column.hover-over{
     display: flex;
 }
 
-
 .modal .bg{
     position: absolute;
     height: 100%;
@@ -152,11 +152,13 @@ section .task-column.hover-over{
     gap: var(--padding-m);
     border-radius: var(--border-radius-m);
     z-index: 10;
+    position: relative;
+    width: min(90vw, 400px);
 }
 
 .modal .center input, .modal .center textarea ,.modal .center select {
     background-color: var(--task-color);
-    min-width: 300px;
+    width: 100%;
     min-height: 50px;
     border: none;
     outline: none;
@@ -173,10 +175,34 @@ section .task-column.hover-over{
     border-radius: var(--border-radius-s);
     cursor: pointer;
     padding: var(--padding-m) var(--padding-l);
-    width: fit-content;
+    width: 100%;
     align-self: center;
-    min-width: 300px;
+}
 
+@media (max-width: 900px) {
+    :root{
+        --nav-padding: 12px 15px;
+        --section-padding: 10px 15px;
+    }
+
+    section{
+        flex-direction: column;
+        gap: var(--padding-l);
+    }
+
+    section .task-column{
+        width: 100%;
+        min-height: 150px;
+    }
 }
 
 
+@media (max-width: 480px) {
+    .modal .center{
+        padding: var(--padding-xl);
+    }
+
+    section .task-column .task button{
+        padding: var(--padding-m) var(--padding-xl);
+    }
+}
